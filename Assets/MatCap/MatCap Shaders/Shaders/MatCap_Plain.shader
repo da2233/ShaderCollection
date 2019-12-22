@@ -38,9 +38,9 @@ Shader "MatCap/Vertex/Plain"
 					v2f o;
 					o.pos = UnityObjectToClipPos (v.vertex);
 					
-					float3 worldNorm = normalize(unity_WorldToObject[0].xyz * v.normal.x + unity_WorldToObject[1].xyz * v.normal.y + unity_WorldToObject[2].xyz * v.normal.z);
-					worldNorm = mul((float3x3)UNITY_MATRIX_V, worldNorm);
-					o.cap.xy = worldNorm.xy * 0.5 + 0.5;
+					//float3 worldNorm = normalize(unity_WorldToObject[0].xyz * v.normal.x + unity_WorldToObject[1].xyz * v.normal.y + unity_WorldToObject[2].xyz * v.normal.z);
+					//worldNorm = mul((float3x3)UNITY_MATRIX_V, worldNorm);
+					o.cap.xy = normalize(mul(UNITY_MATRIX_IT_MV, v.normal)) * 0.5 + 0.5;
 					
 					UNITY_TRANSFER_FOG(o, o.pos);
 
